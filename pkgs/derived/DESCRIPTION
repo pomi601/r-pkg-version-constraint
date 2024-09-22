@@ -1,3 +1,8 @@
 Package: pomi.test.derived
 Version: 1.0
 Imports: pomi.test.base (>= 2.0)
+License: none
+Description: none
+Title: none
+Author: none
+Maintainer: none <none@none.none>

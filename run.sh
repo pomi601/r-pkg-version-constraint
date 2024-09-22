@@ -50,10 +50,14 @@ repos="c(\"file://$scriptdir/repos/repo1\",\"file://$scriptdir/repos/repo3\")"
 echo "checking available packages at repos = $repos"
 Rscript -e "available.packages(repos = $repos)"
 
-## FIXME need to manually install dependency because install.packages won't do it for some reason...
+echo "checking base"
+R_LIBS_USER=$libdir R CMD check "$scriptdir/pkgs/base/v1"
+
 echo "installing base"
 R_LIBS_USER=$libdir Rscript -e "install.packages('pomi.test.base', repos = $repos)"
 
+echo "checking derived - EXPECT FAIL"
+R_LIBS_USER=$libdir R CMD check "$scriptdir/pkgs/derived"
 
 echo "install derived - EXPECT FAIL"
 R_LIBS_USER=$libdir Rscript -e "AP <- available.packages(repos = $repos); install.packages('pomi.test.derived', available = AP, verbose = TRUE)"
